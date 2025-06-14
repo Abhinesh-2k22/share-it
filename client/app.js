@@ -1,4 +1,4 @@
-const API_URL = 'https://share-it-jfad.onrender.com/api';
+const API_URL = 'https://share-it-backend.onrender.com/api';
 
 // Initialize Chart
 let expenseChart;
