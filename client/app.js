@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-// API URL - using localhost for development
-=======
->>>>>>> f0f3c06ea465e6b040fd53f23d0f8c44e93cc023
 const API_URL = 'https://share-it-backend.onrender.com/api';
 
 // Initialize Chart
