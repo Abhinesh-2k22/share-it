@@ -1,4 +1,5 @@
-const API_URL = 'https://share-it-jfad.onrender.com/api';
+// API URL - using localhost for development
+const API_URL = 'https://share-it-backend.onrender.com/api';
 
 // Initialize Chart
 let expenseChart;
@@ -136,6 +137,16 @@ async function loadSettlements() {
 document.getElementById('expenseForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     
+    const submitButton = document.querySelector('#expenseForm button[type="submit"]');
+    const originalButtonText = submitButton.innerHTML;
+    
+    // Disable button and show loading state
+    submitButton.disabled = true;
+    submitButton.innerHTML = `
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        Adding...
+    `;
+    
     const expense = {
         description: document.getElementById('description').value,
         amount: parseFloat(document.getElementById('amount').value),
@@ -159,6 +170,10 @@ document.getElementById('expenseForm').addEventListener('submit', async (e) => {
         }
     } catch (error) {
         console.error('Error adding expense:', error);
+    } finally {
+        // Re-enable button and restore original text
+        submitButton.disabled = false;
+        submitButton.innerHTML = originalButtonText;
     }
 });
 
