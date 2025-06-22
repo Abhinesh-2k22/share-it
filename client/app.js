@@ -1,4 +1,5 @@
 const API_URL = 'https://share-it-backend.onrender.com/api';
+// const API_URL = 'http://localhost:5000/api';
 
 // Initialize Chart
 let expenseChart;
@@ -104,14 +105,19 @@ async function loadSettlements() {
             <div class="mb-3">
                 <h4 style="font-size: 1.1rem;">Family Balances</h4>
                 <ul class="list-group">
-                    ${data.familyBalances.map(balance => `
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            ${balance.family} (${balance.members} members)
-                            <span class="badge ${balance.balance >= 0 ? 'bg-success' : 'bg-danger'} rounded-pill">
-                                ₹${balance.balance.toFixed(2)}
-                            </span>
-                        </li>
-                    `).join('')}
+                    ${data.familyBalances.map(balance => {
+                        const balanceText = balance.balance >= 0 
+                            ? `+ ₹${balance.balance.toFixed(2)}` 
+                            : `- ₹${Math.abs(balance.balance).toFixed(2)}`;
+                        return `
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                ${balance.family} (${balance.members} members)
+                                <span class="badge ${balance.balance >= 0 ? 'bg-success' : 'bg-danger'} rounded-pill">
+                                    ${balanceText}
+                                </span>
+                            </li>
+                        `;
+                    }).join('')}
                 </ul>
             </div>
             <div>

@@ -4,7 +4,7 @@ const Expense = require('../models/Expense');
 
 // Family member counts
 const FAMILY_MEMBERS = {
-  mahe: 3,
+  mahe: 4,
   pavi: 3,
   jeeva: 3,
   manick: 4,
@@ -65,10 +65,14 @@ router.get('/settlements', async (req, res) => {
       };
     });
 
+    console.log('Family Balances:', familyBalances);
+
     // Calculate settlements
     const settlements = [];
-    const debtors = familyBalances.filter(f => f.balance < 0).sort((a, b) => a.balance - b.balance);
-    const creditors = familyBalances.filter(f => f.balance > 0).sort((a, b) => b.balance - a.balance);
+    const settlementBalances = JSON.parse(JSON.stringify(familyBalances));
+
+    const debtors = settlementBalances.filter(f => f.balance < 0).sort((a, b) => a.balance - b.balance);
+    const creditors = settlementBalances.filter(f => f.balance > 0).sort((a, b) => b.balance - a.balance);
 
     for (const debtor of debtors) {
       let remainingDebt = Math.abs(debtor.balance);
