@@ -7,7 +7,7 @@ const FAMILY_MEMBERS = {
   mahe: 4,
   pavi: 3,
   jeeva: 3,
-  manick: 4,
+  manick: 3,
   guru: 3,
   karthick: 2,
   manju: 2
